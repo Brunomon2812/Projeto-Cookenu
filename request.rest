@@ -1,0 +1,46 @@
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "Mari",
+    "email": "mari@gmail.com",
+    "password": "abc123"
+}
+
+###
+# @name login
+
+POST http://localhost:3003/users/login
+Content-Type: application/json
+
+{
+    "email": "mari@gmail.com",
+    "password": "abc123"
+}
+
+###
+# @name getProfile
+GET http://localhost:3003/users/profile
+Authorization: {{login.response.body.token}}
+
+###
+
+http://localhost:3003/users/{{getProfile.response.body.id}}/profile
+Authorization: {{login.response.body.token}}
+
+###
+
+POST http://localhost:3003/recipe
+Content-Type: application/json
+Authorization: {{login.response.body.token}}
+
+{
+    "title": "Hot Dog",
+    "description": "pao, linguica ou salsicha, molho e nada de pure de batata"
+    
+}
+
+###
+
+ http://localhost:3003/recipe/ce68340b-3e47-4ad3-9de0-db1315371e95
+Authorization: {{login.response.body.token}}
